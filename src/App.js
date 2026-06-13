@@ -153,6 +153,8 @@ function LandingPage({ onGoToDashboard }) {
                     <option>Retard de +3h</option>
                     <option>Refus d'embarquement</option>
                     <option>Correspondance manquée</option>
+                    <option>Annulation partielle par revendeur (Opodo, eDreams…)</option>
+                    <option>Modification unilatérale par revendeur</option>
                   </select>
                 </div>
               </div>
@@ -254,6 +256,7 @@ function LandingPage({ onGoToDashboard }) {
             { nom: "Marc D.", ville: "Marseille", avis: "J'étais sceptique au départ mais le service est vraiment sérieux. Ils m'ont tenu informé à chaque étape. 400€ récupérés !", montant: "400€", etoiles: 5 },
             { nom: "Léa B.", ville: "Toulouse", avis: "Vol annulé la veille des vacances. Stressée et déçue, ClaimUp a pris en charge tout le dossier. 600€ remboursés en 5 semaines.", montant: "600€", etoiles: 5 },
             { nom: "Antoine F.", ville: "Nantes", avis: "Simple, rapide, efficace. J'avais abandonné après 2 mois de relances. Ils ont obtenu 250€ là où je n'avais rien eu.", montant: "250€", etoiles: 5 },
+            { nom: "Inès K.", ville: "Strasbourg", avis: "eDreams avait annulé mon vol retour sans me prévenir. Impossible de les joindre. ClaimUp a récupéré 400€ en s'occupant de tout le litige.", montant: "400€", etoiles: 5 },
           ].map((a, i) => (
             <div key={i} style={{ background: C.navyMid, borderRadius: 14, padding: "24px 22px", border: "1px solid #ffffff08" }}>
               <div style={{ display: "flex", gap: 4, marginBottom: 14 }}>
@@ -281,7 +284,8 @@ function LandingPage({ onGoToDashboard }) {
         <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 32, letterSpacing: "-0.02em" }}>Questions fréquentes</h2>
         {[
           { q: "Combien coûte le service ?", r: "Rien si on perd. En cas de succès, on prélève 30% du montant remboursé. Exemple : 600€ récupérés → vous recevez 420€, on garde 180€." },
-          { q: "Quels vols sont éligibles ?", r: "Les vols au départ ou à destination de l'UE, retardés de +3h, annulés ou avec refus d'embarquement. La règle CE 261/2004 s'applique." },
+          { q: "Quels vols sont éligibles ?", r: "Les vols au départ ou à destination de l'UE, retardés de +3h, annulés ou avec refus d'embarquement. Les annulations partielles effectuées par un revendeur (Opodo, eDreams, Booking…) sont également concernées. La règle CE 261/2004 s'applique." },
+          { q: "Mon billet a été partiellement annulé par un revendeur, suis-je concerné ?", r: "Oui ! Si un revendeur a annulé un tronçon de votre billet (ex : retour annulé, escale supprimée) sans votre accord, vous avez droit à une indemnisation. On s'occupe de tout, y compris les litiges avec les intermédiaires." },
           { q: "Combien de temps ça prend ?", r: "En moyenne 45 jours. Certaines compagnies règlent en 2 semaines, d'autres traînent jusqu'à 3 mois." },
           { q: "Et si j'ai déjà contacté la compagnie ?", r: "Pas de problème, déposez quand même votre dossier. On prend le relais à partir de là où vous en êtes." },
         ].map((f, i) => (
