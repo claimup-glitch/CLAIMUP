@@ -50,29 +50,32 @@ function ProgressBar({ value, statut }) {
 
 // ─── LANDING PAGE ────────────────────────────────────────────────
 function LandingPage({ onGoToDashboard }) {
-  const [form, setForm] = useState({ nom: "", email: "", tel: "", vol: "", date: "", trajet: "", motif: "" });
+  const [form, setForm] = useState({ nom: "", email: "", tel: "", vol: "", date: "", trajet: "", compagnie: "", siteAchat: "", motif: "" });
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [dossierNum] = useState(() => Math.floor(Math.random() * 900 + 100));
   const [hover, setHover] = useState(null);
 
-  const handleNext = () => {
-    if (step < 3) setStep(s => s + 1);
-    else {
-      const subject = encodeURIComponent(`Nouveau dossier ClaimUp - ${form.nom}`);
-      const body = encodeURIComponent(
-        `NOUVEAU DOSSIER CLAIMUP\n\n` +
-        `Nom : ${form.nom}\n` +
-        `Email : ${form.email}\n` +
-        `Téléphone : ${form.tel}\n\n` +
-        `Vol : ${form.vol}\n` +
-        `Date : ${form.date}\n` +
-        `Trajet : ${form.trajet}\n` +
-        `Motif : ${form.motif}\n`
-      );
-      window.location.href = `mailto:contact@claimup.fr?subject=${subject}&body=${body}`;
-      setSubmitted(true);
-    }
+  const handleNext = async () => {
+    if (step < 3) { setStep(s => s + 1); return; }
+    try {
+      await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: "service_k45pihh",
+          template_id: "template_75mpran",
+          user_id: "VUu4I7Uw8R9JS5pUl",
+          template_params: {
+            title: `Nouveau dossier - ${form.nom}`,
+            name: form.nom,
+            email: form.email,
+            message: `Vol : ${form.vol}\nDate : ${form.date}\nTrajet : ${form.trajet}\nCompagnie : ${form.compagnie}\nSite achat : ${form.siteAchat}\nMotif : ${form.motif}\nTél : ${form.tel}`,
+          }
+        })
+      });
+    } catch(e) { console.log(e); }
+    setSubmitted(true);
   };
 
   const field = (key, label, placeholder, type = "text") => (
@@ -160,6 +163,37 @@ function LandingPage({ onGoToDashboard }) {
                 {field("date", "Date du vol", "12/06/2026")}
                 {field("trajet", "Trajet", "Paris CDG → New York JFK")}
                 <div>
+                  <label style={{ fontSize: 12, color: C.muted, display: "block", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Compagnie aérienne</label>
+                  <select value={form.compagnie} onChange={e => setForm({ ...form, compagnie: e.target.value })} style={{ width: "100%", background: C.navyLight, border: "1px solid #ffffff15", borderRadius: 8, padding: "12px 14px", color: C.white, fontSize: 14, outline: "none", boxSizing: "border-box", fontFamily: "Inter, sans-serif" }}>
+                    <option value="">Sélectionner…</option>
+                    <option>Air France</option>
+                    <option>easyJet</option>
+                    <option>Ryanair</option>
+                    <option>Transavia</option>
+                    <option>Vueling</option>
+                    <option>Lufthansa</option>
+                    <option>British Airways</option>
+                    <option>TUI</option>
+                    <option>Wizz Air</option>
+                    <option>Autre</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ fontSize: 12, color: C.muted, display: "block", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Site d'achat du billet</label>
+                  <select value={form.siteAchat} onChange={e => setForm({ ...form, siteAchat: e.target.value })} style={{ width: "100%", background: C.navyLight, border: "1px solid #ffffff15", borderRadius: 8, padding: "12px 14px", color: C.white, fontSize: 14, outline: "none", boxSizing: "border-box", fontFamily: "Inter, sans-serif" }}>
+                    <option value="">Sélectionner…</option>
+                    <option>Directement sur le site de la compagnie</option>
+                    <option>Opodo</option>
+                    <option>eDreams</option>
+                    <option>Booking.com</option>
+                    <option>Kayak</option>
+                    <option>Expedia</option>
+                    <option>Lastminute</option>
+                    <option>Voyage Privé</option>
+                    <option>Autre revendeur</option>
+                  </select>
+                </div>
+                <div>
                   <label style={{ fontSize: 12, color: C.muted, display: "block", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Motif</label>
                   <select value={form.motif} onChange={e => setForm({ ...form, motif: e.target.value })} style={{ width: "100%", background: C.navyLight, border: "1px solid #ffffff15", borderRadius: 8, padding: "12px 14px", color: C.white, fontSize: 14, outline: "none", boxSizing: "border-box", fontFamily: "Inter, sans-serif" }}>
                     <option value="">Sélectionner…</option>
@@ -194,6 +228,8 @@ function LandingPage({ onGoToDashboard }) {
                     ["Vol", form.vol || "—"],
                     ["Trajet", form.trajet || "—"],
                     ["Date", form.date || "—"],
+                    ["Compagnie", form.compagnie || "—"],
+                    ["Site d'achat", form.siteAchat || "—"],
                     ["Motif", form.motif || "—"],
                     ["Nom", form.nom || "—"],
                     ["Email", form.email || "—"],
