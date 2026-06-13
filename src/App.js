@@ -238,6 +238,44 @@ function LandingPage({ onGoToDashboard }) {
         </div>
       </section>
 
+      {/* AVIS CLIENTS */}
+      <section style={{ borderTop: "1px solid #ffffff08", padding: "64px 24px", maxWidth: 900, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <div style={{ display: "inline-block", background: "#F5A62318", border: `1px solid ${C.amber}35`, borderRadius: 20, padding: "5px 14px", fontSize: 11, color: C.amber, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>
+            Témoignages
+          </div>
+          <h2 style={{ fontSize: 30, fontWeight: 800, letterSpacing: "-0.02em" }}>Ils ont été remboursés</h2>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+          {[
+            { nom: "Sarah M.", ville: "Paris", avis: "Mon vol Air France a été annulé 2h avant le départ. J'avais abandonné l'idée d'être remboursée. ClaimUp a récupéré 600€ en 3 semaines. Incroyable !", montant: "600€", etoiles: 5 },
+            { nom: "Julien T.", ville: "Lyon", avis: "Retard de 4h sur un vol easyJet. J'avais essayé seul mais la compagnie ne répondait plus. ClaimUp a tout géré, j'ai reçu 400€ sans rien faire.", montant: "400€", etoiles: 5 },
+            { nom: "Camille R.", ville: "Bordeaux", avis: "Refus d'embarquement sur un vol Ryanair. En moins de 6 semaines, 250€ sur mon compte. Je recommande à tous mes amis !", montant: "250€", etoiles: 5 },
+            { nom: "Marc D.", ville: "Marseille", avis: "J'étais sceptique au départ mais le service est vraiment sérieux. Ils m'ont tenu informé à chaque étape. 400€ récupérés !", montant: "400€", etoiles: 5 },
+            { nom: "Léa B.", ville: "Toulouse", avis: "Vol annulé la veille des vacances. Stressée et déçue, ClaimUp a pris en charge tout le dossier. 600€ remboursés en 5 semaines.", montant: "600€", etoiles: 5 },
+            { nom: "Antoine F.", ville: "Nantes", avis: "Simple, rapide, efficace. J'avais abandonné après 2 mois de relances. Ils ont obtenu 250€ là où je n'avais rien eu.", montant: "250€", etoiles: 5 },
+          ].map((a, i) => (
+            <div key={i} style={{ background: C.navyMid, borderRadius: 14, padding: "24px 22px", border: "1px solid #ffffff08" }}>
+              <div style={{ display: "flex", gap: 4, marginBottom: 14 }}>
+                {Array.from({ length: a.etoiles }).map((_, j) => (
+                  <span key={j} style={{ color: C.amber, fontSize: 14 }}>★</span>
+                ))}
+              </div>
+              <p style={{ color: C.muted, fontSize: 13, lineHeight: 1.75, marginBottom: 18 }}>"{a.avis}"</p>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{a.nom}</div>
+                  <div style={{ fontSize: 12, color: C.muted }}>{a.ville}</div>
+                </div>
+                <div style={{ background: "#052E16", color: C.green, border: `1px solid ${C.green}40`, borderRadius: 8, padding: "4px 12px", fontSize: 13, fontWeight: 700 }}>
+                  +{a.montant}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" style={{ maxWidth: 620, margin: "0 auto", padding: "20px 24px 80px" }}>
         <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 32, letterSpacing: "-0.02em" }}>Questions fréquentes</h2>
