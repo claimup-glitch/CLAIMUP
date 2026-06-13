@@ -81,15 +81,13 @@ function LandingPage({ onGoToDashboard }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           service_id: "service_k45pihh",
-          template_id: "template_75mpran",
+          template_id: "template_a7t3gyl",
           user_id: "VUu4I7Uw8R9JS5pUl",
           template_params: {
-            title: `Confirmation de votre dossier ClaimUp`,
-            name: "ClaimUp",
-            email: "contact@claimup.fr",
-            message: `Bonjour ${form.nom},\n\nVotre dossier a bien été enregistré.\n\nNous allons étudier votre demande et vous recontacter rapidement.\n\nVol : ${form.vol}\nTrajet : ${form.trajet}\nMotif : ${form.motif}\n\nÀ très bientôt,\nL'équipe ClaimUp\ncontact@claimup.fr`,
-          },
-          headers: { "Reply-To": form.email, "To": form.email }
+            name: form.nom,
+            email: form.email,
+            message: `Bonjour ${form.nom},\n\nVotre dossier a bien été enregistré.\n\nVol : ${form.vol}\nTrajet : ${form.trajet}\nMotif : ${form.motif}\n\nNous allons étudier votre demande et vous recontacter rapidement.\n\nÀ très bientôt,\nL'équipe ClaimUp\ncontact@claimup.fr`,
+          }
         })
       });
     } catch(e) { console.log(e); }
