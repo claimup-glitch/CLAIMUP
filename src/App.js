@@ -509,9 +509,60 @@ function Dashboard({ onBack }) {
   );
 }
 
+function LoginPage({ onSuccess, onBack }) {
+  const [pwd, setPwd] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleLogin = () => {
+    if (pwd === "1945T1955W") {
+      onSuccess();
+    } else {
+      setError(true);
+      setPwd("");
+      setTimeout(() => setError(false), 2000);
+    }
+  };
+
+  return (
+    <div style={{ fontFamily: "Inter, sans-serif", background: C.navy, minHeight: "100vh", color: C.white, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: "100%", maxWidth: 380, padding: "0 24px" }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div style={{ width: 48, height: 48, background: C.amber, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, margin: "0 auto 16px" }}>✈</div>
+          <div style={{ fontWeight: 800, fontSize: 22, letterSpacing: "-0.02em" }}>ClaimUp Pro</div>
+          <div style={{ color: C.muted, fontSize: 14, marginTop: 6 }}>Accès réservé</div>
+        </div>
+
+        <div style={{ background: C.navyMid, borderRadius: 16, padding: "28px 24px", border: `1px solid ${error ? C.red : "#ffffff0f"}`, transition: "border-color 0.3s" }}>
+          <label style={{ fontSize: 12, color: C.muted, display: "block", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.05em" }}>Mot de passe</label>
+          <input
+            type="password"
+            value={pwd}
+            onChange={e => setPwd(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && handleLogin()}
+            placeholder="••••••••••"
+            style={{ width: "100%", background: C.navyLight, border: `1px solid ${error ? C.red : "#ffffff15"}`, borderRadius: 8, padding: "12px 14px", color: C.white, fontSize: 14, outline: "none", boxSizing: "border-box", fontFamily: "Inter, sans-serif", marginBottom: 8 }}
+          />
+          {error && <div style={{ color: C.red, fontSize: 12, marginBottom: 8 }}>Mot de passe incorrect</div>}
+          <button
+            onClick={handleLogin}
+            style={{ width: "100%", marginTop: 8, background: C.amber, color: C.navy, border: "none", borderRadius: 10, padding: "13px", fontSize: 15, fontWeight: 800, cursor: "pointer" }}
+          >
+            Accéder →
+          </button>
+        </div>
+
+        <button onClick={onBack} style={{ display: "block", margin: "20px auto 0", background: "transparent", border: "none", color: C.muted, cursor: "pointer", fontSize: 13 }}>
+          ← Retour au site
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [view, setView] = useState("landing");
-  return view === "landing"
-    ? <LandingPage onGoToDashboard={() => setView("dashboard")} />
-    : <Dashboard onBack={() => setView("landing")} />;
+
+  if (view === "login") return <LoginPage onSuccess={() => setView("dashboard")} onBack={() => setView("landing")} />;
+  if (view === "dashboard") return <Dashboard onBack={() => setView("landing")} />;
+  return <LandingPage onGoToDashboard={() => setView("login")} />;
 }
