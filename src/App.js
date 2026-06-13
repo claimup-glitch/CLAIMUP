@@ -58,7 +58,21 @@ function LandingPage({ onGoToDashboard }) {
 
   const handleNext = () => {
     if (step < 3) setStep(s => s + 1);
-    else setSubmitted(true);
+    else {
+      const subject = encodeURIComponent(`Nouveau dossier ClaimUp - ${form.nom}`);
+      const body = encodeURIComponent(
+        `NOUVEAU DOSSIER CLAIMUP\n\n` +
+        `Nom : ${form.nom}\n` +
+        `Email : ${form.email}\n` +
+        `Téléphone : ${form.tel}\n\n` +
+        `Vol : ${form.vol}\n` +
+        `Date : ${form.date}\n` +
+        `Trajet : ${form.trajet}\n` +
+        `Motif : ${form.motif}\n`
+      );
+      window.location.href = `mailto:contact@claimup.fr?subject=${subject}&body=${body}`;
+      setSubmitted(true);
+    }
   };
 
   const field = (key, label, placeholder, type = "text") => (
