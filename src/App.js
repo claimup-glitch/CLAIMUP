@@ -59,6 +59,7 @@ function LandingPage({ onGoToDashboard }) {
   const handleNext = async () => {
     if (step < 3) { setStep(s => s + 1); return; }
     try {
+      // Email à toi avec le dossier complet
       await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,6 +73,23 @@ function LandingPage({ onGoToDashboard }) {
             email: form.email,
             message: `Vol : ${form.vol}\nDate : ${form.date}\nTrajet : ${form.trajet}\nCompagnie : ${form.compagnie}\nSite achat : ${form.siteAchat}\nMotif : ${form.motif}\nTél : ${form.tel}`,
           }
+        })
+      });
+      // Email de confirmation au client
+      await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: "service_k45pihh",
+          template_id: "template_75mpran",
+          user_id: "VUu4I7Uw8R9JS5pUl",
+          template_params: {
+            title: `Confirmation de votre dossier ClaimUp`,
+            name: "ClaimUp",
+            email: "contact@claimup.fr",
+            message: `Bonjour ${form.nom},\n\nVotre dossier a bien été enregistré.\n\nNous allons étudier votre demande et vous recontacter rapidement.\n\nVol : ${form.vol}\nTrajet : ${form.trajet}\nMotif : ${form.motif}\n\nÀ très bientôt,\nL'équipe ClaimUp\ncontact@claimup.fr`,
+          },
+          headers: { "Reply-To": form.email, "To": form.email }
         })
       });
     } catch(e) { console.log(e); }
