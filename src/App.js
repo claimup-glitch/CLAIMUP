@@ -111,19 +111,15 @@ function LandingPage({ onGoToDashboard }) {
     <div style={{ fontFamily: "Inter, sans-serif", background: C.navy, minHeight: "100vh", color: C.white }}>
 
       {/* NAV */}
-      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 32px", borderBottom: "1px solid #ffffff0f", position: "sticky", top: 0, background: C.navy + "ee", backdropFilter: "blur(12px)", zIndex: 100 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, background: C.amber, borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
-          <span style={{ fontWeight: 800, fontSize: 19, letterSpacing: "-0.03em" }}>ClaimUp</span>
+      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid #ffffff0f", position: "sticky", top: 0, background: C.navy + "ee", backdropFilter: "blur(12px)", zIndex: 100 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ width: 30, height: 30, background: C.amber, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0 }}>✈</div>
+          <span style={{ fontWeight: 800, fontSize: 17, letterSpacing: "-0.03em" }}>ClaimUp</span>
         </div>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          <a href="#comment" style={{ color: C.muted, fontSize: 13, textDecoration: "none" }}>Comment ça marche</a>
-          <a href="#faq" style={{ color: C.muted, fontSize: 13, textDecoration: "none" }}>FAQ</a>
-          <button
-            onClick={onGoToDashboard}
-            style={{ background: "transparent", border: "1px solid #ffffff20", color: C.muted, borderRadius: 8, padding: "8px 16px", cursor: "pointer", fontSize: 13 }}
-          >Espace pro →</button>
-        </div>
+        <button
+          onClick={onGoToDashboard}
+          style={{ background: "transparent", border: "1px solid #ffffff20", color: C.muted, borderRadius: 8, padding: "7px 12px", cursor: "pointer", fontSize: 12, whiteSpace: "nowrap" }}
+        >Pro →</button>
       </nav>
 
       {/* HERO */}
