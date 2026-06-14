@@ -64,7 +64,7 @@ function LandingPage({ onGoToDashboard }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: "service_k45pihh",
+          service_id: "service_7mcvawd",
           template_id: "template_75mpran",
           user_id: "VUu4I7Uw8R9JS5pUl",
           template_params: {
@@ -80,7 +80,7 @@ function LandingPage({ onGoToDashboard }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: "service_k45pihh",
+          service_id: "service_7mcvawd",
           template_id: "template_a7t3gyl",
           user_id: "VUu4I7Uw8R9JS5pUl",
           template_params: {
